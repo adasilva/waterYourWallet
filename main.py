@@ -19,12 +19,17 @@ class UserInput(FloatLayout):
     size - size of plant (small, medium, or large)
     '''
         # determine spread (in inches) of plant based on size
-        if size=='small':
+        if self.ids.plantSmall.state=='down':
             spread = 12
-        elif size=='medium':
+        elif self.ids.plantMedium.state=='down':
             spread = 24
         else:
-            spread = 48        
+            spread = 48
+
+        try:
+            inches = float(self.ids.waterRequired.text)
+        except:
+            self.ids.result.text='Enter a number in water required text box'
 
         # volume of water is the inches times the spread
         volH2O = pi*(spread/2)**2*inches
