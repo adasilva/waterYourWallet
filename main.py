@@ -10,14 +10,15 @@ from kivy.uix.widget import Widget
 
 class UserInput(FloatLayout):
     def calculateWaterCost(self):
-        '''calculates the cost per month of water for a plant, name.
+        '''calculates the cost per month of water for a plant.
 
-    Inputs: 
+    Inputs are obtained from user input:
     name - name of plant
     inches - inches per week required
-    number - number of this type of plant
-    size - size of plant (small, medium, or large)
+    numplants - number of this type of plant
+    size - size of plant (small, medium, or large, chosen via toggle button)
     '''
+        numplants=1
         # determine spread (in inches) of plant based on size
         if self.ids.plantSmall.state=='down':
             spread = 12
@@ -33,8 +34,8 @@ class UserInput(FloatLayout):
 
             # volume of water is the inches times the spread
             volH2O = pi*(spread/2)**2*inches
-            # convert to gallons (from google)
-            volH2O = volH2O*0.004329
+            # convert to gallons (from google) and multiply by number of plants
+            volH2O = volH2O*0.004329*numplants
 
             # Average person uses 100 gallons of water per day
             # (http://www.epa.gov/WaterSense/pubs/indoor.html; accessed Aug 2014)
