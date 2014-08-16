@@ -23,34 +23,37 @@ class UserInput(FloatLayout):
             spread = 12
         elif self.ids.plantMedium.state=='down':
             spread = 24
-        else:
+        elif self.ids.plantLarge.state=='down':
             spread = 48
+        else:
+            spread = None
 
         try:
             inches = float(self.ids.waterRequired.text)
+
+            # volume of water is the inches times the spread
+            volH2O = pi*(spread/2)**2*inches
+            # convert to gallons (from google)
+            volH2O = volH2O*0.004329
+
+            # Average person uses 100 gallons of water per day
+            # (http://www.epa.gov/WaterSense/pubs/indoor.html; accessed Aug 2014)
+            # Cost of water from City of Austin utilities depends on total usage
+            # The average household (family of 4) uses 12,000 gallons per month
+            # Austin charges $9.95 per 1000 gallons for 11,001 - 20,000 total 
+            # gallons of usage 
+            # (http://www.austintexas.gov/department/austin-water-utility-service-rates; accessed Aug 2014)
+
+            # Cost per gallon:
+            cpg = 9.95/1000.
+
+            # Total cost
+            cost = cpg*volH2O*4 # multiply by 4 to get monthly cost
+
+            self.ids.result.text='$ %0.2f per month' %(cost,)
+
         except:
-            self.ids.result.text='Enter a number in water required text box'
-
-        # volume of water is the inches times the spread
-        volH2O = pi*(spread/2)**2*inches
-        # convert to gallons (from google)
-        volH2O = volH2O*0.004329
-
-        # Average person uses 100 gallons of water per day
-        # (http://www.epa.gov/WaterSense/pubs/indoor.html; accessed Aug 2014)
-        # Cost of water from City of Austin utilities depends on total usage
-        # The average household (family of 4) uses 12,000 gallons per month
-        # Austin charges $9.95 per 1000 gallons for 11,001 - 20,000 total 
-        # gallons of usage 
-        # (http://www.austintexas.gov/department/austin-water-utility-service-rates; accessed Aug 2014)
-
-        # Cost per gallon:
-        cpg = 9.95/1000.
-
-        # Total cost
-        cost = cpg*volH2O*4 # multiply by 4 to get monthly cost
-
-        self.ids.result.text='$'+str(cost)
+            self.ids.result.text='Enter a number in water required text box\nor check that plant size was chosen.'
         return None
 
 
