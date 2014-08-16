@@ -54,7 +54,10 @@ class UserInput(FloatLayout):
             self.ids.result.text='$ %0.2f per month' %(cost,)
 
         except:
-            self.ids.result.text='Enter a number in water required text box\nor check that plant size was chosen.'
+            if spread==None:
+                self.ids.result.text='Make sure the plant size was chosen.'
+            else:
+                self.ids.result.text='Enter a number in water required text box.'
         return None
 
 
