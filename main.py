@@ -9,7 +9,7 @@ from kivy.uix.widget import Widget
 
 
 class UserInput(FloatLayout):
-    def calculateWaterCost(self,inches=1,number=1,size='small'):
+    def calculateWaterCost(self):
         '''calculates the cost per month of water for a plant, name.
 
     Inputs: 
