@@ -82,6 +82,12 @@
                         size_hint: (1/5., 1)
                         text: '%s' % round(float(waterSlider.value), 2)
 
+                Label:
+                    size_hint:(1, 1/12.)
+                    text: '[color=CCFFCC]HINT: a plant that requires a lot of water usually\nneeds up to 2 inches of water per week.[/color]'
+                    font_size: '13sp'
+                    markup: True
+
                 GridLayout:
                     size_hint: (1, 1/12.)
                     cols: 3
