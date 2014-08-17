@@ -10,15 +10,16 @@ from kivy.uix.widget import Widget
 
 class UserInput(FloatLayout):
     def calculateWaterCost(self):
-        '''calculates the cost per month of water for a plant, name.
+        '''calculates the cost per month of water for a plant.
 
-    Inputs: 
+    Inputs are obtained from user input:
     name - name of plant
     inches - inches per week required
-    number - number of this type of plant
-    size - size of plant (small, medium, or large)
+    numplants - number of this type of plant
+    size - size of plant (small, medium, or large, chosen via toggle button)
     '''
         # determine spread (in inches) of plant based on size
+        numplants=int(self.ids.numPlants.value)
         if self.ids.plantSmall.state=='down':
             spread = 12
         elif self.ids.plantMedium.state=='down':
@@ -29,12 +30,12 @@ class UserInput(FloatLayout):
             spread = None
 
         try:
-            inches = float(self.ids.waterRequired.text)
+            inches = float(self.ids.waterSlider.value)
 
             # volume of water is the inches times the spread
             volH2O = pi*(spread/2)**2*inches
-            # convert to gallons (from google)
-            volH2O = volH2O*0.004329
+            # convert to gallons (from google) and multiply by number of plants
+            volH2O = volH2O*0.004329*numplants
 
             # Average person uses 100 gallons of water per day
             # (http://www.epa.gov/WaterSense/pubs/indoor.html; accessed Aug 2014)
@@ -53,8 +54,12 @@ class UserInput(FloatLayout):
             self.ids.result.text='$ %0.2f per month' %(cost,)
 
         except:
-            self.ids.result.text='Enter a number in water required text box\nor check that plant size was chosen.'
+            if spread==None:
+                self.ids.result.text='Make sure the plant size was chosen.'
+            else:
+                self.ids.result.text='Enter a number in water required text box.'
         return None
+
 
 
 class PlantApp(App):
