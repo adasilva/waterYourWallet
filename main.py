@@ -4,9 +4,6 @@ kivy.require('1.8.0')
 from math import pi
 from kivy.app import App
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.widget import Widget
-
-
 
 class UserInput(FloatLayout):
     def calculateWaterCost(self):
