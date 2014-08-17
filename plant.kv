@@ -125,7 +125,9 @@
 
 <CityChoice>:
     GridLayout:
-        cols: 4
+        cols:4
+        size_hint: (1,1/4.)
+        pos_hint: {'x':0,'y':.5}
         ToggleButton:
             id: cityAustin
             text: 'Austin'
@@ -147,3 +149,13 @@
         Button:
             id: closeSettingsButton
             text: 'Done'
+
+
+<Button>:
+    font_size: '20sp'
+
+<ToggleButton>:
+    font_size: '20sp'
+
+<Label>:
+    font_size: '20sp'
