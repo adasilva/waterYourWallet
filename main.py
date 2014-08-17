@@ -3,10 +3,13 @@ kivy.require('1.8.0')
 
 from math import pi
 from kivy.app import App
+from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
-
-
+from kivy.uix.button import Button
+from kivy.uix.togglebutton import ToggleButton
+from kivy.uix.label import Label
+from kivy.uix.popup import Popup
 
 class UserInput(FloatLayout):
     def calculateWaterCost(self):
@@ -58,6 +61,13 @@ class UserInput(FloatLayout):
                 self.ids.result.text='Make sure the plant size was chosen.'
             else:
                 self.ids.result.text='Enter a number in water required text box.'
+        return None
+
+    def settingsPopup(self):
+        content = cityChoice()
+        popup = Popup(title='Change city',content=content, auto_dismiss = False, on_dismiss = # function that changes city!)
+        content.bind(on_press=popup.dismiss)
+        popup.open()
         return None
 
 
