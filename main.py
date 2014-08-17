@@ -15,6 +15,7 @@ class UserInput(FloatLayout):
     numplants - number of this type of plant
     size - size of plant (small, medium, or large, chosen via toggle button)
     '''
+        numplants=1
         # determine spread (in inches) of plant based on size
         numplants=int(self.ids.numPlants.value)
         if self.ids.plantSmall.state=='down':
