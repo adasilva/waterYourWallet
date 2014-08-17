@@ -1,6 +1,7 @@
 import kivy
 kivy.require('1.8.0')
 
+import waterCosts
 from math import pi
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
@@ -12,6 +13,9 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 
 class UserInput(FloatLayout):
+    def __init__(self,**kwargs):
+        self.city = 'Austin'
+
     def calculateWaterCost(self):
         '''calculates the cost per month of water for a plant.
 
@@ -40,16 +44,17 @@ class UserInput(FloatLayout):
             # convert to gallons (from google) and multiply by number of plants
             volH2O = volH2O*0.004329*numplants
 
-            # Average person uses 100 gallons of water per day
-            # (http://www.epa.gov/WaterSense/pubs/indoor.html; accessed Aug 2014)
-            # Cost of water from City of Austin utilities depends on total usage
-            # The average household (family of 4) uses 12,000 gallons per month
-            # Austin charges $9.95 per 1000 gallons for 11,001 - 20,000 total
-            # gallons of usage
-            # (http://www.austintexas.gov/department/austin-water-utility-service-rates; accessed Aug 2014)
-
-            # Cost per gallon:
-            cpg = 9.95/1000.
+            allCosts = waterCosts.waterCosts()
+            if self.city == 'Austin':
+                cpg = allCosts.austin
+            elif self.city == 'San Antonio':
+                cpg = allCosts.sanAntonio
+            elif self.city == 'Dallas':
+                cpg = allCosts.dallas
+            elif self.city == 'Houston':
+                cpg = allCosts.houston
+            else:
+                raise ValueError
 
             # Total cost
             cost = cpg*volH2O*4 # multiply by 4 to get monthly cost
@@ -64,6 +69,7 @@ class UserInput(FloatLayout):
         return None
 
     def changeCity(self,city):
+        self.city = city
         self.ids.cityLabel.text = 'City:   %s, TX' %(city,)
         return None
         
