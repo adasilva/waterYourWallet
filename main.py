@@ -63,6 +63,27 @@ class UserInput(FloatLayout):
                 self.ids.result.text='Enter a number in water required text box.'
         return None
 
+    def changeCity(self,city):
+        self.ids.cityLabel.text = 'City:   %s, TX' %(city,)
+        return None
+        
+    def settingsPopup(self):
+        content = cityChoice()
+        popup = Popup(title='Where do you live?',content=content, auto_dismiss = False, on_dismiss = lambda x: self.changeCity(content.getCity()))
+        content.ids.closeSettingsButton.bind(on_press=popup.dismiss)
+        popup.open()
+        return None
+
+class cityChoice(FloatLayout):
+    def getCity(self):
+        if self.ids.cityAustin.state=='down':
+            return 'Austin'
+        elif self.ids.cityHouston.state=='down':
+            return 'Houston'
+        elif self.ids.cityDallas.state=='down':
+            return 'Dallas'
+        elif self.ids.citySanAntonio.state=='down':
+            return 'San Antonio'
 
 class PlantApp(App):
     def build(self):
