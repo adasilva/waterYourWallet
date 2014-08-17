@@ -14,7 +14,9 @@ from kivy.uix.popup import Popup
 
 class UserInput(FloatLayout):
     def __init__(self,**kwargs):
+        super(UserInput,self).__init__(**kwargs)
         self.city = 'Austin'
+        print 'startng app!'
 
     def calculateWaterCost(self):
         '''calculates the cost per month of water for a plant.
@@ -54,7 +56,7 @@ class UserInput(FloatLayout):
             elif self.city == 'Houston':
                 cpg = allCosts.houston
             else:
-                raise ValueError
+                cpg = None
 
             # Total cost
             cost = cpg*volH2O*4 # multiply by 4 to get monthly cost
@@ -64,6 +66,8 @@ class UserInput(FloatLayout):
         except:
             if spread==None:
                 self.ids.result.text='Make sure the plant size was chosen.'
+            elif cpg==None:
+                self.ids.result.text='Did not receive city choice.'
             else:
                 self.ids.result.text='Enter a number in water required text box.'
         return None

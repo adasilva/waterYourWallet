@@ -1,6 +1,6 @@
 
 class waterCosts:
-    def __init__():
+    def __init__(self):
         # Costs per gallon in different cities:
         
         # Average person uses 100 gallons of water per day
