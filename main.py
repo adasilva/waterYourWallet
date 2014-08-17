@@ -16,7 +16,7 @@ class UserInput(FloatLayout):
     def __init__(self,**kwargs):
         super(UserInput,self).__init__(**kwargs)
         self.city = 'Austin'
-        print 'startng app!'
+        print self.city
 
     def calculateWaterCost(self):
         '''calculates the cost per month of water for a plant.
@@ -37,10 +37,8 @@ class UserInput(FloatLayout):
             spread = 48
         else:
             spread = None
-
         try:
             inches = float(self.ids.waterSlider.value)
-
             # volume of water is the inches times the spread
             volH2O = pi*(spread/2)**2*inches
             # convert to gallons (from google) and multiply by number of plants
