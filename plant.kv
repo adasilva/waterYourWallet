@@ -14,6 +14,7 @@
                 Label:
                     size_hint: (1, 1/12.)
                     text: 'Where do you live?'
+
                 GridLayout:
                     size_hint: (1, 1/12.)
                     cols: 4
@@ -46,30 +47,39 @@
                     size_hint: (1, 1/12.)
                     text: 'How many plants do you have?'
 
-                Slider:
+                GridLayout:
+                    cols: 2
                     size_hint: (1, 1/12.)
-                    id:numPlants
-                    max: 20
-                    min: 1
-                    value: 1
-                    step: 1
-                Label:
-                    size_hint: (1, 1/12.)
-                    text: '%s plant(s)' % int(numPlants.value)
+
+                    Slider:
+                        size_hint: (4/5., 1)
+                        id:numPlants
+                        max: 20
+                        min: 1
+                        value: 1
+                        step: 1
+                    Label:
+                        size_hint: (1/5., 1)
+                        text: '%s' % int(numPlants.value)
 
 
                 Label:
                     size_hint: (1, 1/12.)
                     text: 'How many inches of water does your plant\nrequire per week?'
-                Slider:
-                    id: waterSlider
-                    size_hint: (1, 1/12.)
-                    max:4
-                    value: waterSlider.value
 
-                Label:
+                GridLayout:
+                    cols: 2
                     size_hint: (1, 1/12.)
-                    text: '%s inches of water per week' % round(float(waterSlider.value), 2)
+
+                    Slider:
+                        id: waterSlider
+                        size_hint: (4/5.,1)
+                        max:4
+                        value: waterSlider.value
+
+                    Label:
+                        size_hint: (1/5., 1)
+                        text: '%s' % round(float(waterSlider.value), 2)
 
                 GridLayout:
                     size_hint: (1, 1/12.)
