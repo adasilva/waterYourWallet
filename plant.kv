@@ -4,34 +4,23 @@
     GridLayout:
         rows: 3
         GridLayout:
-            rows: 2
+            rows:3
             size_hint: (1, 4/5.)
 
             GridLayout:
                 rows: 12
-                Label:
-                    size_hint: (1, 1/12.)
-                    text: 'Where do you live?'
 
-                GridLayout:
-                    size_hint: (1, 1/12.)
-                    cols: 4
-                    ToggleButton:
-                        id: cityAustin
-                        text: 'Austin'
-                        group: 'City'
-                    ToggleButton:
-                        id: cityHouston
-                        text: 'Houston'
-                        group: 'City'
-                    ToggleButton:
-                        id: cityDallas
-                        text: 'Dallas'
-                        group: 'City'
-                    ToggleButton:
-                        id: citySanAntonio
-                        text: 'San Antonio'
-                        group: 'City'
+                BoxLayout:
+                    orientation: 'horizontal'
+                    size_hint_y: 1/12.
+                    Button:
+                        text: 'Settings'
+                        size_hint_x: 1/4.
+                        on_press: root.settingsPopup()
+
+                    Label:
+                        id: cityLabel
+                        text: 'City:   Austin, TX'
 
                 Label:
                     size_hint: (1, 1/12.)
@@ -132,3 +121,29 @@
                 id: result
                 text: ''
                 font_size: '20sp'
+
+
+<CityChoice>:
+    GridLayout:
+        cols: 4
+        ToggleButton:
+            id: cityAustin
+            text: 'Austin'
+            group: 'City'
+            state: 'down'
+        ToggleButton:
+            id: cityHouston
+            text: 'Houston'
+            group: 'City'
+        ToggleButton:
+            id: cityDallas
+            text: 'Dallas'
+            group: 'City'
+        ToggleButton:
+            id: citySanAntonio
+            text: 'San Antonio'
+            group: 'City'
+
+        Button:
+            id: closeSettingsButton
+            text: 'Done'
