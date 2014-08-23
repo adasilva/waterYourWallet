@@ -32,13 +32,13 @@
                     Label:
                         size_hint: (1/3., 1)
                         text: ''
-
                     TextInput:
+                        id: plantName
                         size_hint: (1/3., 1)
                         text: ''
                         multiline: False
                         length: 200
-
+                        on_text: root.openPlantNameDropdown()
                     Label:
                         size_hint: (1/3., 1)
                         text: ''
@@ -197,3 +197,6 @@
 <Label>:
     font_size: '18sp'
     markup: True
+
+<PlantNameDropdown>:
+    id: PlantNameDropdown

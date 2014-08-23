@@ -2,6 +2,8 @@ import kivy
 kivy.require('1.8.0')
 
 import waterCosts
+import database_functions
+
 from math import pi
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
@@ -11,6 +13,7 @@ from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
+from kivy.uix.dropdown import DropDown
 
 class UserInput(FloatLayout):
     def __init__(self,**kwargs):
@@ -82,6 +85,25 @@ class UserInput(FloatLayout):
         popup.open()
         return None
 
+    def openPlantNameDropdown(self):
+        try:
+            self.dropdown.dismiss()  #dismiss if already exists
+        except:
+            pass
+        print 'in openPlantNameDropdown function!'
+        if self.ids.plantName.text=='':
+            pass  # wait for input text
+        else:
+            buttonText = database_functions.match_by_name(self.ids.plantName.text)
+            self.dropdown = PlantNameDropdown(buttonText)
+            self.dropdown.open(self.ids.plantName)
+            self.dropdown.bind(on_select=lambda instance,x: self.selectPlant(x)) #setattr(self.ids.plantName, 'text', x))
+
+    def selectPlant(self,text):
+        '''This is a dummy function: it does not do anything useful yet!'''
+        self.ids.plantName.text = text
+        # need to change water needed, size, etc. based on plant choice...
+
 class cityChoice(FloatLayout):
     def getCity(self):
         if self.ids.cityAustin.state=='down':
@@ -92,6 +114,16 @@ class cityChoice(FloatLayout):
             return 'Dallas'
         elif self.ids.citySanAntonio.state=='down':
             return 'San Antonio'
+
+class PlantNameDropdown(DropDown):
+    def __init__(self,textList):
+        super(PlantNameDropdown,self).__init__()
+        self.selected=''
+        for t in textList:
+            print 'putting %s in button list!' %t
+            b=Button(text=t, size_hint_y=None, height=44)
+            b.bind(on_release=lambda b: self.select(b.text))
+            self.add_widget(b)
 
 class PlantApp(App):
     def build(self):
