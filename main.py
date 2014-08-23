@@ -93,9 +93,6 @@ class UserInput(FloatLayout):
         popup.open()
         return None
         
-class helpLayout(FloatLayout):
-    pass
-
     def openPlantNameDropdown(self):
         try:
             self.dropdown.dismiss()  #dismiss if already exists
@@ -124,6 +121,10 @@ class cityChoice(FloatLayout):
             return 'Dallas'
         elif self.ids.citySanAntonio.state=='down':
             return 'San Antonio'
+
+class helpLayout(FloatLayout):
+    pass
+
 
 class PlantNameDropdown(DropDown):
     def __init__(self,textList):
