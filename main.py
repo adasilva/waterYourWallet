@@ -85,7 +85,8 @@ class UserInput(FloatLayout):
     def helpPopup(self):
         content = helpLayout()
         popup = Popup(title='Help with Water Your Wallet', 
-                      content=content, auto_dismiss=True)
+                      content=content, auto_dismiss=True,
+                      size_hint=(0.75,0.9))
         popup.open()
         return None
         
