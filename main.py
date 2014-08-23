@@ -90,7 +90,6 @@ class UserInput(FloatLayout):
             self.dropdown.dismiss()  #dismiss if already exists
         except:
             pass
-        print 'in openPlantNameDropdown function!'
         if self.ids.plantName.text=='':
             pass  # wait for input text
         else:
@@ -120,7 +119,7 @@ class PlantNameDropdown(DropDown):
         super(PlantNameDropdown,self).__init__()
         self.selected=''
         for t in textList:
-            print 'putting %s in button list!' %t
+            # The button height needs to be set or kivy gets really confused!
             b=Button(text=t, size_hint_y=None, height=44)
             b.bind(on_release=lambda b: self.select(b.text))
             self.add_widget(b)
