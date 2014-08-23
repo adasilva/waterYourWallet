@@ -84,6 +84,17 @@ class UserInput(FloatLayout):
         content.ids.closeSettingsButton.bind(on_press=popup.dismiss)
         popup.open()
         return None
+        
+    def helpPopup(self):
+        content = helpLayout()
+        popup = Popup(title='Help with Water Your Wallet', 
+                      content=content, auto_dismiss=True,
+                      size_hint=(0.75,0.9))
+        popup.open()
+        return None
+        
+class helpLayout(FloatLayout):
+    pass
 
     def openPlantNameDropdown(self):
         try:
