@@ -14,9 +14,14 @@
                     orientation: 'horizontal'
                     size_hint_y: 1/12.
                     Button:
-                        text: 'Settings'
                         size_hint_x: 1/4.
                         on_press: root.settingsPopup()
+                        Image:
+                            source: './img/gear.png'
+                            y: self.parent.y + (self.parent.height-32)/2
+                            x: self.parent.x + (self.parent.width-32)/2
+                            size: 32,32
+                            allow_stretch: True
 
                     Label:
                         id: cityLabel
