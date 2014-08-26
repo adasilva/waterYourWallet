@@ -107,9 +107,26 @@ class UserInput(FloatLayout):
             self.dropdown.bind(on_select=lambda instance,x: self.selectPlant(x)) #setattr(self.ids.plantName, 'text', x))
 
     def selectPlant(self,text):
-        '''This is a dummy function: it does not do anything useful yet!'''
+        '''When the plant is selected, the data is taken from database and used to set the size toggle button and water slider bars.'''
         self.ids.plantName.text = text
-        # need to change water needed, size, etc. based on plant choice...
+        properties = database_functions.get_properties_by_name(text)
+        self.ids.waterSlider.value = properties['water']
+        if properties['size']=='Small':
+            self.ids.plantMedium.state = 'normal'
+            self.ids.plantLarge.state = 'normal'
+            self.ids.plantSmall.state = 'down'
+        elif properties['size']=='Medium':
+            self.ids.plantSmall.state = 'normal'
+            self.ids.plantLarge.state = 'normal'
+            self.ids.plantMedium.state = 'down'
+        elif properties['size']=='Large':
+            self.ids.plantSmall.state = 'normal'
+            self.ids.plantMedium.state = 'normal'
+            self.ids.plantLarge.state = 'down'
+        else:
+            self.ids.plantSmall.state = 'normal'
+            self.ids.plantMedium.state = 'normal'
+            self.ids.plantLarge.state = 'normal'
 
 class cityChoice(FloatLayout):
     def getCity(self):
