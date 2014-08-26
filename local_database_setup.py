@@ -15,5 +15,5 @@ plants.insert({'Name':'tomato','size':'Large','water':1})
 plants.insert({'Name':'pepper','size':'Medium','water':1})
 plants.insert({'Name':'lemon verbena','size':'Large','water':.25})
 plants.insert({'Name':'basil','size':'Medium','water':1})
-plants.insert({'Name':'thyme','size':'small','water':.5})
+plants.insert({'Name':'thyme','size':'Small','water':.5})
 
