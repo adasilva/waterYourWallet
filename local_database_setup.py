@@ -9,11 +9,21 @@ db =  conn.gardendb
 # create a collection in the database
 plants = db.plants
 
-# add plants to the collection
-# Note: I'm not sure if the properties are correct! For example only :)
-plants.insert({'Name':'tomato','size':'Large','water':1})
-plants.insert({'Name':'pepper','size':'Medium','water':1})
-plants.insert({'Name':'lemon verbena','size':'Large','water':.25})
-plants.insert({'Name':'basil','size':'Medium','water':1})
-plants.insert({'Name':'thyme','size':'Small','water':.5})
 
+# Span data from: 
+# http://www.ces.ncsu.edu/depts/hort/consumer/quickref/vegetable/plantingguide.html
+plants.insert({'Name':'beans','span':6,'water':None})
+plants.insert({'Name':'broccoli','span':18,'water':None})
+plants.insert({'Name':'cabbage','span':12,'water':None})
+plants.insert({'Name':'corn','span':12,'water':None})
+plants.insert({'Name':'cucumber','span':10,'water':None})
+plants.insert({'Name':'eggplant','span':24,'water':None})
+plants.insert({'Name':'okra','span':12,'water':None})
+plants.insert({'Name':'peppers','span':18,'water':None})
+plants.insert({'Name':'chili pepper','span':15,'water':None})
+plants.insert({'Name':'pumpkin','span':48,'water':None})
+plants.insert({'Name':'spinach','span':6,'water':None})
+plants.insert({'Name':'swiss chard','span':6,'water':None})
+plants.insert({'Name':'tomato','span':18,'water':None})
+plants.insert({'Name':'zucchini','span':24,'water':None})
+plants.insert({'Name':'watermelon','span':60,'water':None})
