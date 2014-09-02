@@ -29,6 +29,12 @@
                     Button:
                         size_hint_x: 1/12.
                         on_press: root.helpPopup()
+                        Image:
+                            source: './img/smallhelpicon.png'
+                            y: self.parent.y + (self.parent.height-32)/2
+                            x: self.parent.x + (self.parent.width-32)/2
+                            size: 32,32
+                            allow_stretch: True
 
                 Label:
                     size_hint: (1, 1/12.)
