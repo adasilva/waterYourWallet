@@ -2,7 +2,7 @@ import kivy
 kivy.require('1.8.0')
 
 import waterCosts
-import database_functions
+from database_functions import plantdb
 
 from math import pi
 from kivy.app import App
@@ -16,10 +16,10 @@ from kivy.uix.popup import Popup
 from kivy.uix.dropdown import DropDown
 
 class UserInput(FloatLayout):
-    def __init__(self,**kwargs):
+    def __init__(self,db,**kwargs):
         super(UserInput,self).__init__(**kwargs)
         self.city = 'Austin'
-        print self.city
+        self.db = db
 
     def calculateWaterCost(self):
         '''calculates the cost per month of water for a plant.
@@ -101,7 +101,7 @@ class UserInput(FloatLayout):
         if self.ids.plantName.text=='':
             pass  # wait for input text
         else:
-            buttonText = database_functions.match_by_name(self.ids.plantName.text)
+            buttonText = self.db.match_by_name(self.ids.plantName.text)
             self.dropdown = PlantNameDropdown(buttonText)
             self.dropdown.open(self.ids.plantName)
             self.dropdown.bind(on_select=lambda instance,x: self.selectPlant(x)) #setattr(self.ids.plantName, 'text', x))
@@ -109,7 +109,7 @@ class UserInput(FloatLayout):
     def selectPlant(self,text):
         '''When the plant is selected, the data is taken from database and used to set the size toggle button and water slider bars.'''
         self.ids.plantName.text = text
-        properties = database_functions.get_properties_by_name(text)
+        properties = self.db.get_properties_by_name(text)
         self.ids.waterSlider.value = properties['water']
         if properties['size']=='Small':
             self.ids.plantMedium.state = 'normal'
@@ -155,7 +155,8 @@ class PlantNameDropdown(DropDown):
 
 class PlantApp(App):
     def build(self):
-        return UserInput()
+        with plantdb() as db:
+            return UserInput(db)
 
 
 if __name__ == '__main__':
