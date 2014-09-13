@@ -21,7 +21,7 @@
                 text: 'City:   Austin, TX'
             Button:
                 size_hint_x: 1/4.
-                on_press: root.helpPopup()
+                on_press: root.helpPopup('Choose your plant size and city.\n\nClick outside the help screen.')
                 Image:
                     source: './img/smallhelpicon.png'
                     y: self.parent.y + (self.parent.height-32)/2
@@ -62,9 +62,24 @@
                 size_hint: (1/5., 1)
                 text: '%s' % int(numPlants.value)
 
-        Label:
+        StackLayout:
             size_hint: (1, 1/12.)
-            text: '[color=CCFFCC]How many inches of water does \nyour plant require per week?[/color]'
+
+            Label:
+                size_hint: (3/4., 1.)
+                text: '[color=CCFFCC]How many inches of water\ndoes your plant require per week?[/color]'
+            Button:
+                size_hint: None,None
+                size: 32,32
+                on_press: root.helpPopup('One inch of water per week is a good starting point for most plants. Fruiting plants (e.g. tomatoes) might require more, while most herbs prefer less.\n\nAdjust up if you live in a dry area or if your plants are in pots. Adjust down if you expect a lot of rain.')
+                Image:
+                    source: './img/smallhelpicon.png'
+                    y: self.parent.y + (self.parent.height-32)/2
+                    x: self.parent.x + (self.parent.width-32)/2
+                    size: 32,32
+                    allow_stretch: True
+
+
         GridLayout:
             cols: 2
             size_hint: (1, 1/12.)
@@ -80,13 +95,6 @@
             Label:
                 size_hint: (1/5., 1)
                 text: '%s' % round(float(waterSlider.value), 2)
-
-        Label:
-            size_hint:(1, 1/12.)
-            text: 'HINT: a house plant that requires a lot of water usually\nneeds up to 2 inches of water per week.'
-            font_size: '13sp'
-            markup: True
-
 
         GridLayout:
             size_hint: (1, 1/12.)
@@ -176,9 +184,9 @@
 
 <helpLayout>
     Label:
+        id: helpText
         pos: root.pos
         text_size: self.size
-        text: 'Choose your plant size and city.\n\nClick outside the help screen.'
         halign: 'center'
         valign: 'middle'
 

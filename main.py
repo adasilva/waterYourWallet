@@ -82,8 +82,8 @@ class UserInput(FloatLayout):
         popup.open()
         return None
         
-    def helpPopup(self):
-        content = helpLayout()
+    def helpPopup(self,text):
+        content = helpLayout(text)
         popup = Popup(title='Help with Water Your Wallet', 
                       content=content, auto_dismiss=True,
                       size_hint=(0.75,0.9))
@@ -91,7 +91,9 @@ class UserInput(FloatLayout):
         return None
         
 class helpLayout(FloatLayout):
-    pass
+    def __init__(self,text,**kwargs):
+        super(helpLayout,self).__init__(**kwargs)
+        self.ids.helpText.text=text
 
 class cityChoice(FloatLayout):
     def getCity(self):
