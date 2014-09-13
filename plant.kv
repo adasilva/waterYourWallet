@@ -1,144 +1,123 @@
 #:kivy 1.8.0
 
 <UserInput>:
-    GridLayout:
-        rows: 3
+    BoxLayout:
+        orientation: 'vertical'
         GridLayout:
-            rows:3
-            size_hint: (1, 4/5.)
+            rows: 12
 
-            GridLayout:
-                rows: 12
-
-                BoxLayout:
-                    orientation: 'horizontal'
-                    size_hint_y: 1/12.
-                    Button:
-                        size_hint_x: 1/4.
-                        on_press: root.settingsPopup()
-                        Image:
-                            source: './img/gear.png'
-                            y: self.parent.y + (self.parent.height-32)/2
-                            x: self.parent.x + (self.parent.width-32)/2
-                            size: 32,32
-                            allow_stretch: True
-
-                    Label:
-                        id: cityLabel
-                        text: 'City:   Austin, TX'
-                    Button:
-                        size_hint_x: 1/4.
-                        on_press: root.helpPopup()
-                        Image:
-                            source: './img/smallhelpicon.png'
-                            y: self.parent.y + (self.parent.height-32)/2
-                            x: self.parent.x + (self.parent.width-32)/2
-                            size: 32,32
-                            allow_stretch: True
+            BoxLayout:
+                orientation: 'horizontal'
+                size_hint_y: 1/12.
+                Button:
+                    size_hint_x: 1/4.
+                    on_press: root.settingsPopup()
+                    Image:
+                        source: './img/gear.png'
+                        y: self.parent.y + (self.parent.height-32)/2
+                        x: self.parent.x + (self.parent.width-32)/2
+                        size: 32,32
+                        allow_stretch: True
 
                 Label:
-                    size_hint: (1, 1/12.)
-                    text: '[color=CCFFCC]What kind of plant do you have?[/color]'
-                GridLayout:
-                    size_hint: (1, 1/12.)
-                    cols: 3
+                    id: cityLabel
+                    text: 'City:   Austin, TX'
+                Button:
+                    size_hint_x: 1/4.
+                    on_press: root.helpPopup()
+                    Image:
+                        source: './img/smallhelpicon.png'
+                        y: self.parent.y + (self.parent.height-32)/2
+                        x: self.parent.x + (self.parent.width-32)/2
+                        size: 32,32
+                        allow_stretch: True
 
-                    Label:
-                        size_hint: (1/3., 1)
-                        text: ''
+            Label:
+                size_hint: (1, 1/12.)
+                text: '[color=CCFFCC]What kind of plant do you have?[/color]'
+            AnchorLayout:
+                size_hint: (1, 1/12.)
 
-                    TextInput:
-                        size_hint: (1/3., 1)
-                        text: ''
-                        multiline: False
-                        length: 200
-
-                    Label:
-                        size_hint: (1/3., 1)
-                        text: ''
-
-                Label:
-                    size_hint: (1, 1/12.)
-                    text: '[color=CCFFCC]How many plants do you have?[/color]'
-
-                GridLayout:
-                    cols: 2
-                    size_hint: (1, 1/12.)
-
-                    Slider:
-                        size_hint: (4/5., 1)
-                        id:numPlants
-                        max: 20
-                        min: 1
-                        value: 1
-                        step: 1
-                        padding: 20
-                    Label:
-                        size_hint: (1/5., 1)
-                        text: '%s' % int(numPlants.value)
-
-
-                Label:
-                    size_hint: (1, 1/12.)
-                    text: '[color=CCFFCC]How many inches of water does \nyour plant require per week?[/color]'
-                GridLayout:
-                    cols: 2
-                    size_hint: (1, 1/12.)
-
-                    Slider:
-                        id: waterSlider
-                        size_hint: (4/5.,1)
-                        max: 10
-                        step: .25
-                        value: 0
-                        padding: 20
-
-                    Label:
-                        size_hint: (1/5., 1)
-                        text: '%s' % round(float(waterSlider.value), 2)
-
-                Label:
-                    size_hint:(1, 1/12.)
-                    text: 'HINT: a house plant that requires a lot of water usually\nneeds up to 2 inches of water per week.'
-                    font_size: '13sp'
-                    markup: True
-
-
-                GridLayout:
-                    size_hint: (1, 1/12.)
-                    cols: 3
-                    ToggleButton:
-                        id: plantSmall
-                        text: 'Small'
-                        group: 'Size'
-                    ToggleButton:
-                        id: plantMedium
-                        text: 'Medium'
-                        group: 'Size'
-                    ToggleButton:
-                        id: plantLarge
-                        text: 'Large'
-                        group: 'Size'
-
-            GridLayout:
-                size_hint: (1, 1/5.)
-                rows: 2
-                Label:
-                    size_hint:(1, 1/12.)
+                TextInput:
+                    size_hint_x: 1/3.
+                    anchor_x: 'center'
                     text: ''
-                GridLayout:
-                    cols: 3
-                    Label:
-                        size_hint: (1/3., 1)
-                        text: ''
-                    Button:
-                        id: calcButton
-                        size_hint: (1/3., 1)
-                        text: 'Calculate'
-                        on_press: root.calculateWaterCost()
-                    Label:
-                        size_hint: (1/3., 1)
-                        text: ''
+                    multiline: False
+                    length: 200
+
+            Label:
+                size_hint: (1, 1/12.)
+                text: '[color=CCFFCC]How many plants do you have?[/color]'
+
+            GridLayout:
+                cols: 2
+                size_hint: (1, 1/12.)
+
+                Slider:
+                    size_hint: (4/5., 1)
+                    id:numPlants
+                    max: 20
+                    min: 1
+                    value: 1
+                    step: 1
+                    padding: 20
+                Label:
+                    size_hint: (1/5., 1)
+                    text: '%s' % int(numPlants.value)
+
+
+            Label:
+                size_hint: (1, 1/12.)
+                text: '[color=CCFFCC]How many inches of water does \nyour plant require per week?[/color]'
+            GridLayout:
+                cols: 2
+                size_hint: (1, 1/12.)
+
+                Slider:
+                    id: waterSlider
+                    size_hint: (4/5.,1)
+                    max: 10
+                    step: .25
+                    value: 0
+                    padding: 20
+
+                Label:
+                    size_hint: (1/5., 1)
+                    text: '%s' % round(float(waterSlider.value), 2)
+
+            Label:
+                size_hint:(1, 1/12.)
+                text: 'HINT: a house plant that requires a lot of water usually\nneeds up to 2 inches of water per week.'
+                font_size: '13sp'
+                markup: True
+
+
+            GridLayout:
+                size_hint: (1, 1/12.)
+                cols: 3
+                ToggleButton:
+                    id: plantSmall
+                    text: 'Small'
+                    group: 'Size'
+                ToggleButton:
+                    id: plantMedium
+                    text: 'Medium'
+                    group: 'Size'
+                ToggleButton:
+                    id: plantLarge
+                    text: 'Large'
+                    group: 'Size'
+
+        GridLayout:
+            size_hint: (1, 1/5.)
+            rows: 2
+            AnchorLayout:
+                Button:
+                    id: calcButton
+                    anchor_x: 'center'
+                    size_hint: (1/3., 1)
+                    text: 'Calculate'
+                    on_press: root.calculateWaterCost()
 
 
         GridLayout:
