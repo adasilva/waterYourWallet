@@ -29,7 +29,7 @@ class plantdb:
         '''Finds a plant by name.
 
         Returns all plant names starting with the input string, ignoring capitalization.'''
-
+        print string
         regx = re.compile('^'+string, re.IGNORECASE)
         retList = []
         db = self.conn.waterwallet  # waterwallet database 

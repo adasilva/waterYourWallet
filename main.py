@@ -80,13 +80,15 @@ class UserInput(FloatLayout):
         
     def settingsPopup(self):
         content = cityChoice()
-        popup = Popup(title='Where do you live?',content=content, auto_dismiss = False, on_dismiss = lambda x: self.changeCity(content.getCity()))
-        content.ids.closeSettingsButton.bind(on_press=popup.dismiss)
+        popup = Popup(title='Where do you live?',
+                      content=content, auto_dismiss = True, 
+                      on_dismiss = lambda x: self.changeCity(content.getCity()),
+                      size_hint=(0.75,0.9))
         popup.open()
         return None
         
-    def helpPopup(self):
-        content = helpLayout()
+    def helpPopup(self,text):
+        content = helpLayout(text)
         popup = Popup(title='Help with Water Your Wallet', 
                       content=content, auto_dismiss=True,
                       size_hint=(0.75,0.9))
@@ -128,7 +130,7 @@ class UserInput(FloatLayout):
             self.ids.plantMedium.state = 'normal'
             self.ids.plantLarge.state = 'normal'
 
-class cityChoice(FloatLayout):
+class cityChoice(GridLayout):
     def getCity(self):
         if self.ids.cityAustin.state=='down':
             return 'Austin'
@@ -140,7 +142,10 @@ class cityChoice(FloatLayout):
             return 'San Antonio'
 
 class helpLayout(FloatLayout):
-    pass
+    def __init__(self,text,**kwargs):
+        super(helpLayout,self).__init__(**kwargs)
+        self.ids.helpText.text=text
+
 
 
 class PlantNameDropdown(DropDown):
