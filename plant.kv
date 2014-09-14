@@ -7,7 +7,7 @@
             orientation: 'horizontal'
             size_hint_y: 1/12.
             Button:
-                size_hint_x: 1/4.
+                size_hint_x: 1/5.
                 on_press: root.settingsPopup()
                 Image:
                     source: './img/gear.png'
@@ -19,8 +19,9 @@
             Label:
                 id: cityLabel
                 text: 'City:   Austin, TX'
+                size_hint_x: 3/5.
             Button:
-                size_hint_x: 1/4.
+                size_hint_x: 1/5.
                 on_press: root.helpPopup('Choose your plant size and city.\n\nClick outside the help screen.')
                 Image:
                     source: './img/smallhelpicon.png'
@@ -62,15 +63,16 @@
                 size_hint: (1/5., 1)
                 text: '%s' % int(numPlants.value)
 
-        StackLayout:
+        BoxLayout:
             size_hint: (1, 1/12.)
-
+            orientation: 'horizontal'
             Label:
-                size_hint: (3/4., 1.)
+                id: waterLabel
+                size_hint: (4/5., 1.)
                 text: '[color=CCFFCC]How many inches of water\ndoes your plant require per week?[/color]'
+                padding:
             Button:
-                size_hint: None,None
-                size: 32,32
+                size_hint: (1/5.,1)
                 on_press: root.helpPopup('One inch of water per week is a good starting point for most plants. Fruiting plants (e.g. tomatoes) might require more, while most herbs prefer less.\n\nAdjust up if you live in a dry area or if your plants are in pots. Adjust down if you expect a lot of rain.')
                 Image:
                     source: './img/smallhelpicon.png'
