@@ -137,54 +137,28 @@
 
 
 <CityChoice>:
-    GridLayout:
-        rows: 3
-
-        GridLayout:
-            cols:4
-            size_hint: (1,1/5.)
-            pos_hint: {'x':0,'y':.5}
-            ToggleButton:
-                font_size: 18
-                id: cityAustin
-                text: 'Austin'
-                group: 'City'
-                state: 'down'
-            ToggleButton:
-                font_size: 18
-                id: cityHouston
-                text: 'Houston'
-                group: 'City'
-            ToggleButton:
-                font_size: 18
-                id: cityDallas
-                text: 'Dallas'
-                group: 'City'
-            ToggleButton:
-                font_size: 18
-                id: citySanAntonio
-                text: 'San \nAntonio'
-                group: 'City'
-
-        GridLayout:
-            cols: 3
-            size_hint: (1, 1/5.)
-
-            Label:
-                size_hint: (1/3., 1)
-                text: ''
-
-            Button:
-                size_hint: (1/3., 1)
-                id: closeSettingsButton
-                text: 'Done'
-
-            Label:
-                size_hint: (1/3., 1)
-                text: ''
-        GridLayout:
-            rows: 1
-            size_hint: (1, 4/5.)
+    rows: 4
+    ToggleButton:
+        font_size: 18
+        id: cityAustin
+        text: 'Austin'
+        group: 'City'
+        state: 'down'
+    ToggleButton:
+        font_size: 18
+        id: cityHouston
+        text: 'Houston'
+        group: 'City'
+    ToggleButton:
+        font_size: 18
+        id: cityDallas
+        text: 'Dallas'
+        group: 'City'
+    ToggleButton:
+        font_size: 18
+        id: citySanAntonio
+        text: 'San \nAntonio'
+        group: 'City'
 
 
 <helpLayout>

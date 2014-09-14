@@ -77,8 +77,10 @@ class UserInput(FloatLayout):
         
     def settingsPopup(self):
         content = cityChoice()
-        popup = Popup(title='Where do you live?',content=content, auto_dismiss = False, on_dismiss = lambda x: self.changeCity(content.getCity()))
-        content.ids.closeSettingsButton.bind(on_press=popup.dismiss)
+        popup = Popup(title='Where do you live?',
+                      content=content, auto_dismiss = True, 
+                      on_dismiss = lambda x: self.changeCity(content.getCity()),
+                      size_hint=(0.75,0.9))
         popup.open()
         return None
         
@@ -95,7 +97,7 @@ class helpLayout(FloatLayout):
         super(helpLayout,self).__init__(**kwargs)
         self.ids.helpText.text=text
 
-class cityChoice(FloatLayout):
+class cityChoice(GridLayout):
     def getCity(self):
         if self.ids.cityAustin.state=='down':
             return 'Austin'
