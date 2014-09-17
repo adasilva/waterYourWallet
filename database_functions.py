@@ -14,10 +14,12 @@ class plantdb:
         with open('config.conf','r') as f:
             user = f.next().strip()
             passwd = f.next().strip()
-            db_uri = 'mongodb://%s:%s@dfw-c9-1.objectrocket.com:37013/waterwallet' %(user,passwd)
-
+            db_uri = 'mongodb://%s:%s@dfw-c9-1.objectrocket.com' %(user,passwd)
+            
         # Connect to database
-        self.conn = pymongo.MongoClient(db_uri,slaveOK=True)
+        rs = '5468b368b1b5adcbfc133ee8ee94bfa1' # replica set ID
+        self.conn = pymongo.MongoClient(db_uri+'/waterwallet',port=37013,replicaSet=rs)
+
 
     def __enter__(self):
         return self
