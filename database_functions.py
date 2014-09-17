@@ -10,7 +10,7 @@ class plantdb:
     def __init__(self):
         '''The plantdb class contains functions for connecting to ObjectRocket remote database'''
 
-        # Get password from configuration file
+        # Get connection info from configuration file
         with open('config.conf','r') as f:
             user = f.next().strip()
             passwd = f.next().strip()
@@ -48,5 +48,8 @@ class plantdb:
         db = self.conn.waterwallet  # waterwallet database 
         plants = db.plants  # plants collection in waterwallet database
         properties = plants.find_one({'Name':string})
-
+        
+        # Catch if information is not there
+        if properties['water']==None:
+            properties['water']=1 #set to 1 inch by default
         return properties
