@@ -9,6 +9,10 @@ import re  #regular expressions for matching strings
 class plantdb:
     def __init__(self):
         '''The plantdb class contains functions for connecting to ObjectRocket remote database'''
+        # Try to open the config file, if it exists, use that info.
+        # (maybe use the try...except ?)
+        # If it doesn't exist, make the config file
+        # use the function setup(self) below
 
         # Get connection info from configuration file
         with open('config.conf','r') as f:
@@ -28,6 +32,11 @@ class plantdb:
 
     def __exit__(self, type, value, traceback):
         self.conn.close()
+
+    def setup(self):
+        '''Sets up configuration file with username and password'''
+        # Open the config file, write the data.
+        return None
 
     def match_by_name(self, string):
         '''Finds a plant by name.
