@@ -4,7 +4,7 @@ import pymongo
 conn = pymongo.Connection('localhost')
 
 # create a database 
-db =  conn.gardendb
+db =  conn.waterwallet
 
 # create a collection in the database
 plants = db.plants

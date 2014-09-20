@@ -18,8 +18,16 @@ from kivy.uix.dropdown import DropDown
 class UserInput(FloatLayout):
     def __init__(self,db,**kwargs):
         super(UserInput,self).__init__(**kwargs)
+
         self.city = 'Austin'
         self.db = db
+
+    def loginPopup(self):
+        login_content = loginLayout()
+        popup = Popup(title='Login', 
+                      content=login_content, auto_dismiss=False,
+                      size_hint=(0.75,0.9))
+        popup.open()
 
     def calculateWaterCost(self):
         '''calculates the cost per month of water for a plant.
@@ -147,6 +155,10 @@ class helpLayout(FloatLayout):
         self.ids.helpText.text=text
 
 
+class loginLayout(GridLayout):
+    def __init__(self,**kwargs):
+        super(loginLayout,self).__init__(**kwargs)
+        
 
 class PlantNameDropdown(DropDown):
     def __init__(self,textList):
