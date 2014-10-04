@@ -120,7 +120,7 @@
 
         GridLayout:
             size_hint: (1, 1/12.)
-            rows: 2
+            rows: 1
             AnchorLayout:
                 Button:
                     id: calcButton
@@ -130,11 +130,18 @@
                     on_press: root.calculateWaterCost()
 
 
-        Label:
-            id: result
+        BoxLayout:
+            orientation: 'horizontal'
             size_hint: (1, 1/12.)
-            text: ''
-            font_size: '20sp'
+            Label:
+                id: result
+                size_hint: (2/3., 1)
+                text: ''
+                font_size: '20sp'
+            Button:
+                size_hint: (1/3., 1)
+                text: 'Add to my garden'
+                on_press: root.add_to_garden()
 
 
 <CityChoice>:

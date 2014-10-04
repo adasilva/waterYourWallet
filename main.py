@@ -6,6 +6,7 @@ from database_functions import plantdb
 
 from math import pi
 from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
@@ -15,7 +16,7 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.dropdown import DropDown
 
-class UserInput(FloatLayout):
+class UserInput(Screen):
     def __init__(self,db,**kwargs):
         super(UserInput,self).__init__(**kwargs)
 
@@ -81,6 +82,27 @@ class UserInput(FloatLayout):
                 self.ids.result.text='Enter a number in water required text box.'
         return None
 
+    def add_to_garden(self):
+        name = self.ids.plantName.text
+        number = self.ids.numPlants.value
+        water = self.ids.waterSlider.value
+        if self.ids.plantSmall.state=='down':
+            size = 'small'
+        elif self.ids.plantMedium.state=='down':
+            size = 'medium'
+        elif self.ids.plantLarge.state=='down':
+            size = 'large'
+        else:
+            size = None
+            self.ids.result.text='Make sure the plant size was chosen.'
+
+        if size!=None:
+            self.db.add_to_user_garden({'Name':name,'Number':number,'Water':water,'Size':size})
+        else:
+            pass
+
+        self.manager.current = 'garden'  #move to if size!=none
+
     def changeCity(self,city):
         self.city = city
         self.ids.cityLabel.text = 'City:   %s, TX' %(city,)
@@ -138,6 +160,15 @@ class UserInput(FloatLayout):
             self.ids.plantMedium.state = 'normal'
             self.ids.plantLarge.state = 'normal'
 
+class UserGarden(Screen):
+    def __init__(self,db,**kwargs):
+        super(UserGarden,self).__init__(**kwargs)
+        self.db = db
+        for entry in self.db.find():
+            print entry
+            #self.add_widget(Label(text=entry.Name))
+
+
 class cityChoice(GridLayout):
     def getCity(self):
         if self.ids.cityAustin.state=='down':
@@ -170,10 +201,16 @@ class PlantNameDropdown(DropDown):
             b.bind(on_release=lambda b: self.select(b.text))
             self.add_widget(b)
 
+class AppScreenManager(ScreenManager):
+    pass
+
 class PlantApp(App):
     def build(self):
+        sm = AppScreenManager()
         with plantdb() as db:
-            return UserInput(db)
+            sm.add_widget(UserInput(db,name='main'))
+            sm.add_widget(UserGarden(db,name='garden'))
+            return sm
 
 
 if __name__ == '__main__':

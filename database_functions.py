@@ -25,8 +25,6 @@ class plantdb:
         # Connect to database
         self.conn = pymongo.MongoClient(db_uri,port=37013,replicaSet=rs)
 
-
-
     def __enter__(self):
         return self
 
@@ -62,3 +60,19 @@ class plantdb:
         if properties['water']==None:
             properties['water']=1 #set to 1 inch by default
         return properties
+
+    def add_to_user_garden(self, properties):
+        if properties['name']!='':
+            db = self.conn.waterwallet
+            with open('config.conf','r') as f:
+                user = f.next().strip()
+                usercoll = db[user]
+            usercoll.insert(properties)
+            
+        return 1
+
+    def find(self):
+        with open('config.conf','r') as f:
+            user = f.next().strip()
+            usercoll = self.conn.waterwallet[user]
+        yield usercoll.find()
