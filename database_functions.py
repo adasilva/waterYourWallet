@@ -75,4 +75,12 @@ class plantdb:
         with open('config.conf','r') as f:
             user = f.next().strip()
             usercoll = self.conn.waterwallet[user]
-        yield usercoll.find()
+
+        retList=[]
+        for p in usercoll.find():
+            retList.append(p) # for each match, append to return list
+            if len(retList)>=10:
+                break
+        return retList
+
+

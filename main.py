@@ -9,7 +9,7 @@ from kivy.app import App
 from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
-from kivy.uix.widget import Widget
+from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
@@ -164,10 +164,12 @@ class UserGarden(Screen):
     def __init__(self,db,**kwargs):
         super(UserGarden,self).__init__(**kwargs)
         self.db = db
+        gotEntry=True
+        b=GridLayout(cols=2)
+        self.add_widget(b)
         for entry in self.db.find():
-            print entry
-            #self.add_widget(Label(text=entry.Name))
-
+            b.add_widget(Label(text=entry['Name']))
+            b.add_widget(Label(text=str(entry['Water'])))
 
 class cityChoice(GridLayout):
     def getCity(self):
