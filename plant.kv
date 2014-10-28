@@ -1,11 +1,30 @@
 #:kivy 1.8.0
 
+<LoginScreen>:
+    GridLayout:
+        cols: 2
+        Label:
+            text: 'username'
+        TextInput:
+            id: username
+        Label:
+            text: 'password'
+        TextInput:
+            id: password
+        Button:
+            text: 'Save'
+            on_press: root.save()
+
 <UserInput>:
     BoxLayout:
         orientation: 'vertical'
         BoxLayout:
             orientation: 'horizontal'
             size_hint_y: 1/12.
+            Button: 
+                size_hint_x: 1/5.
+                text: 'Log in'
+                on_press: root.manager.current = 'login'
             Button:
                 size_hint_x: 1/5.
                 on_press: root.settingsPopup()
@@ -18,7 +37,7 @@
             Label:
                 id: cityLabel
                 text: 'City:   Austin, TX'
-                size_hint_x: 3/5.
+                size_hint_x: 2/5.
             Button:
                 size_hint_x: 1/5.
                 on_press: root.helpPopup('Choose your plant size and city.\n\nClick outside the help screen.')

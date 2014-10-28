@@ -18,6 +18,7 @@ class plantdb:
         with open('config.conf','r') as f:
             user = f.next().strip()
             passwd = f.next().strip()
+        with open('mongoconfig.conf','r') as f:
             host = f.next().strip()
             db_uri = 'mongodb://%s:%s@%s/waterwallet' %(user,passwd,host)
             rs = f.next().strip()

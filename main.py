@@ -6,6 +6,7 @@ from database_functions import plantdb
 
 from math import pi
 from kivy.app import App
+from kivy.uix.screenmanager import ScreenManager, Screen
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.floatlayout import FloatLayout
 from kivy.uix.widget import Widget
@@ -15,19 +16,44 @@ from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.dropdown import DropDown
 
-class UserInput(FloatLayout):
-    def __init__(self,db,**kwargs):
+class LoginScreen(Screen):
+    def __init__(self,**kwargs):
+        super(LoginScreen,self).__init__(**kwargs)
+        try:
+            file_object=open('config.conf', 'r')
+            file_object.close()
+
+        except:
+            pass
+
+    def save(self):
+        username = self.ids.username.text
+        password = self.ids.password.text
+        file_object=open('config.conf', 'w')
+        file_object.write(username+'\n')
+        file_object.write(password+'\n') 
+        file_object.close()
+        self.manager.current = 'main'
+
+
+class UserInput(Screen):
+    def __init__(self,**kwargs):
         super(UserInput,self).__init__(**kwargs)
 
         self.city = 'Austin'
-        self.db = db
 
-    def loginPopup(self):
-        login_content = loginLayout()
-        popup = Popup(title='Login', 
-                      content=login_content, auto_dismiss=False,
-                      size_hint=(0.75,0.9))
-        popup.open()
+    def startdb(self,*args,**kwargs):
+        try:
+            file_object=open('config.conf', 'r')
+            file_object.close()
+            self.db = plantdb()
+
+        except:
+            self.db = None 
+
+    def closedb(self,*args,**kwargs):
+        if self.db != None:
+            self.db.conn.close()
 
     def calculateWaterCost(self):
         '''calculates the cost per month of water for a plant.
@@ -111,15 +137,21 @@ class UserInput(FloatLayout):
         if self.ids.plantName.text=='':
             pass  # wait for input text
         else:
-            buttonText = self.db.match_by_name(self.ids.plantName.text)
-            self.dropdown = PlantNameDropdown(buttonText)
-            self.dropdown.open(self.ids.plantName)
-            self.dropdown.bind(on_select=lambda instance,x: self.selectPlant(x)) #setattr(self.ids.plantName, 'text', x))
+            try:
+                buttonText = self.db.match_by_name(self.ids.plantName.text)
+                self.dropdown = PlantNameDropdown(buttonText)
+                self.dropdown.open(self.ids.plantName)
+                self.dropdown.bind(on_select=lambda instance,x: self.selectPlant(x)) #setattr(self.ids.plantName, 'text', x))
+            except:
+                pass
 
     def selectPlant(self,text):
         '''When the plant is selected, the data is taken from database and used to set the size toggle button and water slider bars.'''
         self.ids.plantName.text = text
-        properties = self.db.get_properties_by_name(text)
+        try:
+            properties = self.db.get_properties_by_name(text)
+        except:
+            properties = {'span':0, 'water':0}
         self.ids.waterSlider.value = properties['water']
         if properties['span']<=12:
             self.ids.plantMedium.state = 'normal'
@@ -170,10 +202,21 @@ class PlantNameDropdown(DropDown):
             b.bind(on_release=lambda b: self.select(b.text))
             self.add_widget(b)
 
+
+class AppScreenManager(ScreenManager):
+    pass
+
 class PlantApp(App):
     def build(self):
-        with plantdb() as db:
-            return UserInput(db)
+        sm = AppScreenManager()
+
+        screen1 = UserInput(name='main')
+        screen1.bind(on_enter = screen1.startdb)
+        screen1.bind(on_leave = screen1.closedb)
+        sm.add_widget(screen1)
+
+        sm.add_widget(LoginScreen(name='login'))
+        return sm
 
 
 if __name__ == '__main__':
