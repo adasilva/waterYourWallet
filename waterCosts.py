@@ -23,7 +23,7 @@ class waterCosts:
         # (http://www.dallascityhall.com/dwu/billing_rates_monthly.html; accessed Aug 2014)
         self.dallas = 5.20/1000.
         
-        # Houston charges 7.44 per 1,000 galllons for over 6,000 gallons
+        # Houston charges 7.44 per 1,000 gallons for over 6,000 gallons
         # gallons of usage per month
         # (http://edocs.publicworks.houstontx.gov/documents/divisions/resource/ucs/2014_water_rates.pdf; accessed Aug 2014)
         self.houston = 7.44/1000.
