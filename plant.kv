@@ -7,10 +7,13 @@
             text: 'username'
         TextInput:
             id: username
+            multiline: False
         Label:
             text: 'password'
         TextInput:
             id: password
+            multiline: False
+            password: True
         Button:
             text: 'Save'
             on_press: root.save()
