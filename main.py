@@ -39,7 +39,6 @@ class LoginScreen(Screen):
 class UserInput(Screen):
     def __init__(self,**kwargs):
         super(UserInput,self).__init__(**kwargs)
-
         self.city = 'Austin'
 
     def startdb(self,*args,**kwargs):
@@ -47,9 +46,19 @@ class UserInput(Screen):
             file_object=open('config.conf', 'r')
             file_object.close()
             self.db = plantdb()
+            self.ids.warningMessage.text = ''
 
         except:
             self.db = None 
+            self.ids.warningMessage.text = '[color=993333][ref=warn]Could not connect to database.[/ref][/color]'
+            popupmsg = 'Could not connect to database.\nCheck your username and password. If you cannot connect, you may still use the app by entering the information by hand!'
+            content = helpLayout(popupmsg)
+            popup = Popup(title='Help with Water Your Wallet', 
+                      content=content, auto_dismiss=True,
+                      size_hint=(0.75,0.9))
+            self.ids.warningMessage.on_ref_press = popup.open
+
+        return None
 
     def closedb(self,*args,**kwargs):
         if self.db != None:

@@ -36,7 +36,7 @@
             size_hint_y: 1/12.
             Button: 
                 size_hint_x: 1/5.
-                text: 'Log in'
+                text: '[color=CCFFCC]Log in[/color]'
                 on_press: root.manager.current = 'login'
             Button:
                 size_hint_x: 1/5.
@@ -61,6 +61,14 @@
                     size: 32,32
                     allow_stretch: True
 
+        AnchorLayout:
+            anchor_x: 'center'
+            size_hint: (1, 1/12.)
+            Label:
+                id: warningMessage
+                markup: True
+                text: ''
+                halign: 'center'
         Label:
             size_hint: (1, 1/12.)
             text: '[color=CCFFCC]What kind of plant do you have?[/color]'
@@ -154,7 +162,7 @@
             size_hint: (1, 1/12.)
             rows: 2
             AnchorLayout:
-                Button:
+                Button: 
                     id: calcButton
                     anchor_x: 'center'
                     size_hint: (1/3., 1)
@@ -193,6 +201,10 @@
         text: 'San \nAntonio'
         group: 'City'
 
+<WarningPopup>:
+    Label:
+        id: warningMessage
+        text:''
 
 <helpLayout>
     Label:
