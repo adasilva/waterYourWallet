@@ -29,7 +29,7 @@ source.include_exts = py,png,jpg,kv,atlas
 #version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 0.4.0
+version = 1.0.0
 
 # (list) Application requirements
 requirements = kivy
@@ -44,7 +44,7 @@ requirements = kivy
 icon.filename = %(source.dir)s/img/water_wallet_icon.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
-orientation = portrait
+orientation = all
 
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 0
