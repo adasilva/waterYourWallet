@@ -29,7 +29,7 @@ source.exclude_patterns = LICENSE.md, README.md, plant_template.ini, local_datab
 #version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 1.0.4
+version = 1.0.3
 
 # (list) Application requirements
 requirements = kivy, pymongo

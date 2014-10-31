@@ -145,7 +145,7 @@ class UserInput(Screen):
                 buttonText = self.db.match_by_name(self.ids.plantName.text)
                 self.dropdown = PlantNameDropdown(buttonText)
                 self.dropdown.open(self.ids.plantName)
-                self.dropdown.bind(on_select=lambda instance,x: self.selectPlant(x)) #setattr(self.ids.plantName, 'text', x))
+                self.dropdown.bind(on_select=lambda instance,x: self.selectPlant(x))
             except:
                 pass
 
@@ -202,7 +202,7 @@ class PlantNameDropdown(DropDown):
         self.selected=''
         for t in textList:
             # The button height needs to be set or kivy gets really confused!
-            b=Button(text=t, size_hint_y=None, height=44)
+            b=Button(text=t, size_hint_y=None, height=88)
             b.bind(on_release=lambda b: self.select(b.text))
             self.add_widget(b)
 
