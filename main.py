@@ -28,6 +28,7 @@ class LoginScreen(Screen):
         password = self.ids.password.text
         self.config.set('remotedb','username',username)
         self.config.set('remotedb','password',password)
+        self.config.write()
         self.manager.current = 'main'
 
 
