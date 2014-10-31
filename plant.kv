@@ -51,7 +51,7 @@
                     allow_stretch: True
             Label:
                 id: cityLabel
-                text: 'City:   Austin, TX'
+                text: 'Austin, TX'
                 size_hint_x: 2/5.
             Button:
                 size_hint_x: 1/5.
@@ -149,15 +149,15 @@
             cols: 3
             ToggleButton:
                 id: plantSmall
-                text: 'Small'
+                text: 'Small\n(0-12 in.)'
                 group: 'Size'
             ToggleButton:
                 id: plantMedium
-                text: 'Medium'
+                text: 'Medium\n(12-24 in.)'
                 group: 'Size'
             ToggleButton:
                 id: plantLarge
-                text: 'Large'
+                text: 'Large\n(24+ in.)'
                 group: 'Size'
 
         GridLayout:
@@ -182,25 +182,21 @@
 <CityChoice>:
     rows: 4
     ToggleButton:
-        font_size: 18
         id: cityAustin
         text: 'Austin'
         group: 'City'
         state: 'down'
     ToggleButton:
-        font_size: 18
         id: cityHouston
         text: 'Houston'
         group: 'City'
     ToggleButton:
-        font_size: 18
         id: cityDallas
         text: 'Dallas'
         group: 'City'
     ToggleButton:
-        font_size: 18
         id: citySanAntonio
-        text: 'San \nAntonio'
+        text: 'San Antonio'
         group: 'City'
 
 <WarningPopup>:

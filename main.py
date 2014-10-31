@@ -113,7 +113,7 @@ class UserInput(Screen):
 
     def changeCity(self,city):
         self.city = city
-        self.ids.cityLabel.text = 'City:   %s, TX' %(city,)
+        self.ids.cityLabel.text = '%s, TX' %(city,)
         return None
         
     def settingsPopup(self):

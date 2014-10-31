@@ -19,17 +19,17 @@ source.include_exts = py,png,jpg,kv,atlas,ini
 #source.exclude_exts = spec
 
 # (list) List of directory to exclude (let empty to not exclude anything)
-#source.exclude_dirs = tests, bin
+source.exclude_dirs = bin, screenshots, img
 
 # (list) List of exclusions using pattern matching
-#source.exclude_patterns = license,images/*/*.jpg
+source.exclude_patterns = LICENSE.md, README.md, plant_template.ini, local_database_setup.py 
 
 # (str) Application versioning (method 1)
 #version.regex = __version__ = ['"](.*)['"]
 #version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 1.0.2
+version = 1.0.4
 
 # (list) Application requirements
 requirements = kivy, pymongo
@@ -44,7 +44,7 @@ requirements = kivy, pymongo
 icon.filename = %(source.dir)s/img/water_wallet_icon.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
-orientation = portrait
+orientation = all
 
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 0
@@ -55,7 +55,7 @@ fullscreen = 0
 #
 
 # (list) Permissions
-android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE,ACCESS_WIFI_STATE,READ_PHONE_STATE,ACCESS_NETWORK_STATE
+android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE
 
 # (int) Android API to use
 #android.api = 14
