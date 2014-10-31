@@ -15,37 +15,31 @@ from kivy.uix.togglebutton import ToggleButton
 from kivy.uix.label import Label
 from kivy.uix.popup import Popup
 from kivy.uix.dropdown import DropDown
+from kivy.config import ConfigParser
+from kivy.uix.settings import Settings
 
 class LoginScreen(Screen):
-    def __init__(self,**kwargs):
+    def __init__(self,config,**kwargs):
         super(LoginScreen,self).__init__(**kwargs)
-        try:
-            file_object=open('config.conf', 'r')
-            file_object.close()
-
-        except:
-            pass
+        self.config = config
 
     def save(self):
         username = self.ids.username.text
         password = self.ids.password.text
-        file_object=open('config.conf', 'w')
-        file_object.write(username+'\n')
-        file_object.write(password+'\n') 
-        file_object.close()
+        self.config.set('remotedb','username',username)
+        self.config.set('remotedb','password',password)
         self.manager.current = 'main'
 
 
 class UserInput(Screen):
-    def __init__(self,**kwargs):
+    def __init__(self,config,**kwargs):
         super(UserInput,self).__init__(**kwargs)
         self.city = 'Austin'
+        self.config = config
 
     def startdb(self,*args,**kwargs):
         try:
-            file_object=open('config.conf', 'r')
-            file_object.close()
-            self.db = plantdb()
+            self.db = plantdb(self.config.get('remotedb','username'),self.config.get('remotedb','password'),self.config.get('remotedb','host'),self.config.get('remotedb','replica set'))
             self.ids.warningMessage.text = ''
 
         except:
@@ -216,15 +210,24 @@ class AppScreenManager(ScreenManager):
     pass
 
 class PlantApp(App):
+    def build_config(self, config):
+        config.setdefaults('remotedb', 
+                           {'host': '',
+                            'replica set': '',
+                            'username': '', 'password':''})
+
     def build(self):
         sm = AppScreenManager()
 
-        screen1 = UserInput(name='main')
+        config = ConfigParser()
+        config.read('plant.ini')
+
+        screen1 = UserInput(config, name='main')
         screen1.bind(on_enter = screen1.startdb)
         screen1.bind(on_leave = screen1.closedb)
         sm.add_widget(screen1)
 
-        sm.add_widget(LoginScreen(name='login'))
+        sm.add_widget(LoginScreen(config, name='login'))
         return sm
 
 

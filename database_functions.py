@@ -7,37 +7,16 @@ import re  #regular expressions for matching strings
 #plants = db.plants
 
 class plantdb:
-    def __init__(self):
+    def __init__(self, user, passwd, host, rs, port = 37013):
         '''The plantdb class contains functions for connecting to ObjectRocket remote database'''
-        # Try to open the config file, if it exists, use that info.
-        # (maybe use the try...except ?)
-        # If it doesn't exist, make the config file
-        # use the function setup(self) below
-
-        # Get connection info from configuration file
-        with open('config.conf','r') as f:
-            user = f.next().strip()
-            passwd = f.next().strip()
-        with open('mongoconfig.conf','r') as f:
-            host = f.next().strip()
-            db_uri = 'mongodb://%s:%s@%s/waterwallet' %(user,passwd,host)
-            rs = f.next().strip()
-
-        # Connect to database
-        self.conn = pymongo.MongoClient(db_uri,port=37013,replicaSet=rs)
-
-
+        db_uri = 'mongodb://%s:%s@%s/waterwallet' %(user,passwd,host)
+        self.conn = pymongo.MongoClient(db_uri,port=port,replicaSet=rs)
 
     def __enter__(self):
         return self
 
     def __exit__(self, type, value, traceback):
         self.conn.close()
-
-    def setup(self):
-        '''Sets up configuration file with username and password'''
-        # Open the config file, write the data.
-        return None
 
     def match_by_name(self, string):
         '''Finds a plant by name.

@@ -13,7 +13,7 @@ package.domain = org.test
 source.dir = .
 
 # (list) Source files to include (let empty to include all the files)
-source.include_exts = py,png,jpg,kv,atlas
+source.include_exts = py,png,jpg,kv,atlas,ini
 
 # (list) Source files to exclude (let empty to not exclude anything)
 #source.exclude_exts = spec
@@ -29,10 +29,10 @@ source.include_exts = py,png,jpg,kv,atlas
 #version.filename = %(source.dir)s/main.py
 
 # (str) Application versioning (method 2)
-version = 1.0.0
+version = 1.0.1
 
 # (list) Application requirements
-requirements = kivy
+requirements = kivy, pymongo
 
 # (list) Garden requirements
 #garden_requirements =
@@ -44,7 +44,7 @@ requirements = kivy
 icon.filename = %(source.dir)s/img/water_wallet_icon.png
 
 # (str) Supported orientation (one of landscape, portrait or all)
-orientation = all
+orientation = portrait
 
 # (bool) Indicate if the application should be fullscreen or not
 fullscreen = 0
@@ -55,7 +55,7 @@ fullscreen = 0
 #
 
 # (list) Permissions
-#android.permissions = INTERNET
+android.permissions = INTERNET, WRITE_EXTERNAL_STORAGE,ACCESS_WIFI_STATE,READ_PHONE_STATE,ACCESS_NETWORK_STATE
 
 # (int) Android API to use
 #android.api = 14
